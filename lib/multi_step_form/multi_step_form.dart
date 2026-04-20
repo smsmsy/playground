@@ -163,8 +163,8 @@ class _InputNameView extends StatefulWidget {
 
 class _InputNameViewState extends State<_InputNameView> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
     setState(() {
       widget.controller.text = widget.state.name;
     });
@@ -172,14 +172,27 @@ class _InputNameViewState extends State<_InputNameView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     return _ViewBase(
       children: [
-        Text('名前を入力してください', style: Theme.of(context).textTheme.headlineMedium),
+        Text('名前を入力してください', style: textTheme.headlineMedium),
         _TextFieldBase(
           controller: widget.controller,
           icon: Icon(Icons.person),
           labelText: '名前',
         ),
+        SizedBox(height: 16),
+        switch (widget.state.validationResult) {
+          null => SizedBox.shrink(),
+          Valid() => SizedBox.shrink(),
+          Invalid(:final errorText) => Text(
+            errorText,
+            style: textTheme.titleMedium?.copyWith(
+              color: theme.colorScheme.error,
+            ),
+          ),
+        },
       ],
     );
   }
@@ -205,8 +218,8 @@ class _InputEmailView extends StatefulWidget {
 
 class __InputEmailViewState extends State<_InputEmailView> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
     setState(() {
       widget.controller.text = widget.state.email ?? '';
     });
@@ -214,17 +227,27 @@ class __InputEmailViewState extends State<_InputEmailView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     return _ViewBase(
       children: [
-        Text(
-          'E-mailアドレスを入力してください',
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
+        Text('E-mailアドレスを入力してください', style: textTheme.headlineMedium),
         _TextFieldBase(
           controller: widget.controller,
           icon: Icon(Icons.mail),
           labelText: 'E-mail',
         ),
+        SizedBox(height: 16),
+        switch (widget.state.validationResult) {
+          null => SizedBox.shrink(),
+          Valid() => SizedBox.shrink(),
+          Invalid(:final errorText) => Text(
+            errorText,
+            style: textTheme.titleMedium?.copyWith(
+              color: theme.colorScheme.error,
+            ),
+          ),
+        },
       ],
     );
   }
