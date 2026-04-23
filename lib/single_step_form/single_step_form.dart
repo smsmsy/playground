@@ -30,7 +30,7 @@ class _SingleStepFormScreenState extends State<SingleStepFormScreen> {
               Text('アカウント作成', style: textTheme.headlineMedium),
               Form(
                 key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteractionIfError,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minWidth: 250, maxWidth: 600),
                   child: Column(
