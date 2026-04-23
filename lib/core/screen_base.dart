@@ -5,13 +5,11 @@ class ScreenBase extends StatelessWidget {
     super.key,
     required this.body,
     this.endDrawer,
-    this.sideBarWidth = 250,
     this.floatingActionButton,
   });
 
   final Widget body;
   final Drawer? endDrawer;
-  final double sideBarWidth;
   final FloatingActionButton? floatingActionButton;
 
   @override
